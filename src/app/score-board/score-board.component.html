@@ -1,0 +1,22 @@
+<button *ngIf="!ready" class="fancy-button" (click)="connect()">Connect</button>
+
+  <h1 *ngIf="ready" name="title" role="header" class="title">
+    Let's strat the game!!!
+  </h1>
+  <h1 *ngIf="ready" name="title" role="header" class="title">
+    👊👊👊 Punch! 👊👊👊
+  </h1>
+
+
+<div class="punch-container">
+
+  <ul class="punch-ul punch-card-4">
+    <li *ngFor="let item of highscore;let i = index" class="punch-bar" [ngClass]="{'selected': item.isMax}">
+      <img src="../../assets/robots/robo{{i+1}}.png" class="punch-bar-item" style="width:75px">
+      <div class="punch-bar-item">
+        <span class="punch-large" aria-label="Player name">Player-{{i+1}}</span> |
+        <span [textContent]="item.value" aria-label="Punch speed"></span>
+      </div>
+    </li>
+  </ul>
+</div>

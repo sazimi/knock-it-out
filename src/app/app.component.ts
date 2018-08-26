@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'knock-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `<knock-score-board></knock-score-board>`
 })
-export class AppComponent {
-  title = 'knock-it-out';
-}
+export class AppComponent { }

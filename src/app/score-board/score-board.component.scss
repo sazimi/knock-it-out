@@ -1,0 +1,58 @@
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+
+:host{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.fancy-button {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    background-color: #541388;
+    font-size: 18px;
+    padding: 20px 0px;
+    width: 150px;
+    -webkit-border-radius: 6;
+    -moz-border-radius: 6;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.fancy-button:hover {
+    color: #541388;
+    background-color: #fff;
+}
+button:focus {
+    outline:0;
+}
+.title {
+    padding: 15px;
+    font-family: 'Press Start 2P', serif;
+}
+
+.punch-ul{
+    list-style-type:none;
+    padding:0;
+    margin:0
+}
+.punch-ul li{
+    padding:8px 16px;
+    border-bottom:1px solid #ddd
+}
+.punch-ul li:last-child{border-bottom:none}
+.punch-bar-item{
+    text-align:center;
+    display: inline;
+}
+.punch-container:after,.punch-container:before, 
+.punch-card-4{
+    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)
+}
+.selected{
+    color: #fff;
+    background-color: #541388;
+}
