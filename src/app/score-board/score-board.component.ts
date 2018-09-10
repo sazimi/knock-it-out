@@ -31,7 +31,6 @@ export class ScoreBoardComponent {
   private gravity: iVector = { x: 0, y: 0, z: 0 };
   private linearAcceleration: iVector = { x: 0, y: 0, z: 0 };
   private accel: Sensor | null = null;
-  private velocityBuffer: number[] = [0, 0, 0, 0, 0];
 
   constructor(public _zone: NgZone) {
   }
@@ -54,38 +53,24 @@ export class ScoreBoardComponent {
       }
 
       const accl = this.linearAcceleration;
-      const velocitySample = Math.abs(Math.sqrt((accl.x / dt) ** 2 + (accl.y / dt) ** 2 + (accl.z / dt) ** 2));
+      const velocity = Math.abs(Math.sqrt((accl.x / dt) ** 2 + (accl.y / dt) ** 2 + (accl.z / dt) ** 2));
 
-      if (velocitySample === Infinity) {
+      if (velocity === Infinity) {
         return;
       }
 
-      this.velocityBuffer.pop();
-      this.velocityBuffer.unshift(velocitySample);
-      let velocity = 0;
-
-      for (let value of this.velocityBuffer) {
-        velocity += value;
-      }
-
-      velocity /= this.velocityBuffer.length;
       this.maxSpeed = Math.max(this.maxSpeed, velocity);
 
-      // no real movement (there is always noise).
-      if (velocity < 0.5) {
-        const punchTreshold = 3; // m/s
-
-        if (this.maxSpeed >= punchTreshold) {
-          this.updateHighScore(this.t, this.maxSpeed);
-        }
-
+      if (this.maxSpeed > 2 && velocity < this.maxSpeed / 2) {
+        this.updateHighScore(this.t, this.maxSpeed);
         this.maxSpeed = 0;
       }
+
     }
   }
 
   updateHighScore(timestamp: number, value: number) {
-    if (this.highscore.length > 10)
+    if (this.highscore.length >= 14)
       return;
 
     this._zone.run(() => {
@@ -96,7 +81,14 @@ export class ScoreBoardComponent {
         item.isMax = +item.value === +highest ? true : false;
       })
 
-      console.log('************ PUNCH ***********');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          let list = document.querySelector('#list');
+          list.children[list.children.length - 1].scrollIntoView({ behavior: "instant", block: "end", inline: "nearest" });
+        })
+
+        console.log('************ PUNCH ***********');
+      });
     });
   }
 
